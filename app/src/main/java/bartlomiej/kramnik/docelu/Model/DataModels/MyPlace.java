@@ -10,13 +10,20 @@ public class MyPlace {
 
     private int Id;
     private String description;
+    private String placeID;
 
-    public MyPlace(int id, String description) {
+    public MyPlace(int id, String description, String placeID) {
         Id = id;
+        this.placeID = placeID;
         this.description = description;
     }
 
     public MyPlace(Place place) {
+
+    }
+
+    public MyPlace(int id) {
+        Id = id;
     }
 
     public int getId() {
@@ -25,5 +32,9 @@ public class MyPlace {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getPlaceID() {
+        return placeID;
     }
 }
