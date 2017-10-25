@@ -5,7 +5,7 @@ import java.util.List;
 import bartlomiej.kramnik.docelu.Model.DataModels.MyPlace;
 
 /**
- * Created by Admin on 17.10.2017.
+ * Interface for dataBase
  */
 
 public interface DataBaseConnector {
@@ -15,5 +15,9 @@ public interface DataBaseConnector {
 
     public void addPlace(MyPlace p);
 
-    public void clarPlaces();
+    public void clearPlaces();
+
+    public void deletePlace(MyPlace p);
+
+    public void deletePlace(int i);
 }
