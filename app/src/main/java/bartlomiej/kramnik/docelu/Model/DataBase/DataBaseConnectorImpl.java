@@ -17,7 +17,7 @@ import bartlomiej.kramnik.docelu.Model.DataModels.MyPlace;
 
 public class DataBaseConnectorImpl extends SQLiteOpenHelper implements DataBaseConnector {
 
-    Context context;
+    private Context context;
 
     private String tableName = "Places";
     private String idColumn = "id";
@@ -48,12 +48,12 @@ public class DataBaseConnectorImpl extends SQLiteOpenHelper implements DataBaseC
 
     @Override
     public List<MyPlace> getPlaces() {
-        List<MyPlace> result = new ArrayList<MyPlace>();
+        List<MyPlace> result = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
 
         Cursor cursor = db.rawQuery("SELECT  * FROM " + tableName, null);
-        db.close();
 
+        if(cursor.getCount()<1)return new ArrayList<>();
         if (cursor.moveToFirst()) {
             do {
                 MyPlace place = new MyPlace(cursor.getInt(0), cursor.getString(1),cursor.getString(2));
@@ -61,7 +61,8 @@ public class DataBaseConnectorImpl extends SQLiteOpenHelper implements DataBaseC
             }
             while (cursor.moveToNext());
         }
-
+        db.close();
+        cursor.close();
         return result;
     }
 
@@ -71,11 +72,16 @@ public class DataBaseConnectorImpl extends SQLiteOpenHelper implements DataBaseC
         SQLiteDatabase db = getReadableDatabase();
 
         Cursor cursor = db.rawQuery("SELECT  * FROM " + tableName, null);
-        db.close();
 
+        if (cursor.getCount()<1){
+            db.close();
+            return null;
+        }
         cursor.moveToFirst();
         cursor.move(i);
         MyPlace place = new MyPlace(cursor.getInt(0), cursor.getString(1), cursor.getString(2));
+        cursor.close();
+        db.close();
         return place;
     }
 
@@ -110,11 +116,12 @@ public class DataBaseConnectorImpl extends SQLiteOpenHelper implements DataBaseC
         SQLiteDatabase db = getReadableDatabase();
 
         Cursor cursor = db.rawQuery("SELECT  * FROM " + tableName, null);
-        db.close();
 
         cursor.moveToFirst();
         cursor.move(i);
         MyPlace place = new MyPlace(cursor.getInt(0), cursor.getString(1), cursor.getString(2));
         deletePlace(place);
+        cursor.close();
+        db.close();
     }
 }
