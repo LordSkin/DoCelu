@@ -30,13 +30,13 @@ public class DataBaseConnectorImpl extends SQLiteOpenHelper implements DataBaseC
     }
 
     public DataBaseConnectorImpl(Context context) {
-        super(context, "PlacesDB", null, 1);
+        super(context, "PlacesDB.db", null, 13);
         this.context = context;
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String CREATE_PLACES_TABLE = "CREATE TABLE IF NOT EXISTS " + tableName + "(" + idColumn + " INTEGER PRIMARY KEY, " + descriptionColumn + "TEXT,"+ placeIDColumn +" TEXT)";
+        String CREATE_PLACES_TABLE = "CREATE TABLE " + tableName + "(" + idColumn + " INTEGER PRIMARY KEY, " + descriptionColumn + " TEXT, "+ placeIDColumn +" TEXT)";
         sqLiteDatabase.execSQL(CREATE_PLACES_TABLE);
     }
 
@@ -71,7 +71,7 @@ public class DataBaseConnectorImpl extends SQLiteOpenHelper implements DataBaseC
         if (i < 0) return null;
         SQLiteDatabase db = getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT  * FROM " + tableName, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + tableName, null);
 
         if (cursor.getCount()<1){
             db.close();
@@ -101,13 +101,15 @@ public class DataBaseConnectorImpl extends SQLiteOpenHelper implements DataBaseC
     public void clearPlaces() {
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL("DROP TABLE IF EXISTS " + tableName);
+        String CREATE_PLACES_TABLE = "CREATE TABLE " + tableName + "(" + idColumn + " INTEGER PRIMARY KEY, " + descriptionColumn + " TEXT, "+ placeIDColumn +" TEXT)";
+        db.execSQL(CREATE_PLACES_TABLE);
         db.close();
     }
 
     @Override
     public void deletePlace(MyPlace p) {
         SQLiteDatabase db = getWritableDatabase();
-        db.delete(tableName, "WHERE "+idColumn+" = "+p.getId(), null);
+        db.delete(tableName, idColumn+" = "+p.getId(), null);
         db.close();
     }
 

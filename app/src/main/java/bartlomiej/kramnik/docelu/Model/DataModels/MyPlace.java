@@ -37,4 +37,25 @@ public class MyPlace {
     public String getPlaceID() {
         return placeID;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof MyPlace)) return false;
+
+        MyPlace myPlace = (MyPlace) o;
+
+        if (getId() != myPlace.getId()) return false;
+        if (getDescription() != null ? !getDescription().equals(myPlace.getDescription()) : myPlace.getDescription() != null)
+            return false;
+        return getPlaceID().equals(myPlace.getPlaceID());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getId();
+        result = 31 * result + (getDescription() != null ? getDescription().hashCode() : 0);
+        result = 31 * result + getPlaceID().hashCode();
+        return result;
+    }
 }

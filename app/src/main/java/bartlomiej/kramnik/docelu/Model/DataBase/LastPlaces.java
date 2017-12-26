@@ -15,7 +15,7 @@ public class LastPlaces {
 
     private List<MyPlace> placesList;
     private DataBaseConnector dataBaseConnector;
-    public static int MAX_SIZE;
+    public static int MAX_SIZE=30;
 
     public LastPlaces(Context c) {
         dataBaseConnector = new DataBaseConnectorImpl(c);
@@ -23,7 +23,8 @@ public class LastPlaces {
     }
 
     public void add(MyPlace myPlace) {
-        MyPlace place = new MyPlace(placesList.get(placesList.size()-1).getId()+1, myPlace.getDescription(), myPlace.getPlaceID());
+        if (myPlace==null) return;
+        MyPlace place = new MyPlace(placesList.size()>0 ? placesList.get(placesList.size()-1).getId()+1 : 0, myPlace.getDescription(), myPlace.getPlaceID());
         placesList.add(place);
         dataBaseConnector.addPlace(place);
         if(placesList.size()>MAX_SIZE){
@@ -39,6 +40,12 @@ public class LastPlaces {
     }
 
     public MyPlace get(int i){
+        if(i>=placesList.size()||i<0) return null;
         return placesList.get(i);
+    }
+
+    public void clear(){
+        dataBaseConnector.clearPlaces();
+        placesList.clear();
     }
 }
