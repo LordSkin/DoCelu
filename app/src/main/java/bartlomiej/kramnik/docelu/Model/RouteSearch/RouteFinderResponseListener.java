@@ -5,7 +5,7 @@ import java.util.List;
 import bartlomiej.kramnik.docelu.Model.DataModels.Route;
 
 /**
- * Created by Admin on 24.10.2017.
+ * Interface for async route finder
  */
 
 public interface RouteFinderResponseListener {

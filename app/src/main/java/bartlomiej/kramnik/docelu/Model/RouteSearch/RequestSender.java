@@ -18,11 +18,11 @@ import java.util.ArrayList;
  * Managing request sender and providing answer
  */
 
-public class RouteFinder implements Response.Listener<String>, Response.ErrorListener {
+public class RequestSender implements Response.Listener<String>, Response.ErrorListener {
 
     Context context;
 
-    public RouteFinder(Context context) {
+    public RequestSender(Context context) {
         this.context = context;
     }
 

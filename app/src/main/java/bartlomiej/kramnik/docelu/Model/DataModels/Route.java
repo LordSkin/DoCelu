@@ -7,21 +7,25 @@ import java.util.List;
  */
 
 public class Route {
-    private List<BusStop> stops;
+    private List<Line> lineList;
 
-    public Route(List<BusStop> stops) {
-        this.stops = stops;
+    public Route(List<Line> stops) {
+        this.lineList = stops;
     }
 
-    public List<BusStop> getStops() {
-        return stops;
+    public List<Line> getLineList() {
+        return lineList;
     }
 
-    public BusStop getFirst(){
-        return stops.get(0);
+    public int getLinesCount(){
+        return lineList.size();
     }
 
-    public BusStop getLast(){
-        return stops.get(stops.size()-1);
+    public Line getFirst(){
+        return lineList.get(0);
+    }
+
+    public Line getLast(){
+        return lineList.get(lineList.size()-1);
     }
 }
