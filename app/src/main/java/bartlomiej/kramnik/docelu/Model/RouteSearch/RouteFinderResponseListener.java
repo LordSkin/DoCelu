@@ -14,5 +14,5 @@ public interface RouteFinderResponseListener {
 
     public void routeNotFound();
 
-    public void error();
+    public void error(Exception e);
 }

@@ -1,4 +1,4 @@
-package bartlomiej.kramnik.docelu;
+package bartlomiej.kramnik.docelu.RequestMenagerTests;
 
 import android.support.test.runner.AndroidJUnit4;
 
@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import bartlomiej.kramnik.docelu.Model.DataModels.Route;
-import bartlomiej.kramnik.docelu.Model.RouteSearch.ResponseInterpreter.ResponseInterpreter;
+import bartlomiej.kramnik.docelu.Model.RouteSearch.ResponseInterpreter.JsonResponseInterpreter;
 
 /**
  * Tests of JsonInterpreter
@@ -16,7 +16,7 @@ import bartlomiej.kramnik.docelu.Model.RouteSearch.ResponseInterpreter.ResponseI
 @RunWith(AndroidJUnit4.class)
 public class ResponseInterpreterTests {
 
-    private ResponseInterpreter responseInterpreter = new ResponseInterpreter();
+    private JsonResponseInterpreter responseInterpreter = new JsonResponseInterpreter();
 
     @Test
     public void interpretingTets1(){

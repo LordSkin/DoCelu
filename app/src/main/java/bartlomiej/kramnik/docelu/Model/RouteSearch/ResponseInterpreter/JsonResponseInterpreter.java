@@ -13,9 +13,9 @@ import bartlomiej.kramnik.docelu.Model.DataModels.Route;
  * Interpreting response from google API
  */
 
-public class ResponseInterpreter {
+public class JsonResponseInterpreter {
 
-    public Route getRoute(String s){
+    public static Route getRoute(String s){
         try{
             JSONObject json = new JSONObject(s);
             JSONArray array = json.getJSONArray("routes");

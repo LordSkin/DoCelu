@@ -1,4 +1,4 @@
-package bartlomiej.kramnik.docelu.Presenter.Search;
+package bartlomiej.kramnik.docelu.Search.View;
 
 import android.content.Context;
 
@@ -10,7 +10,7 @@ import java.util.List;
  * Search Presenter Interface
  */
 
-public interface SearchActivity {
+public interface SearchView {
 
     public void showError(Error e);
 
