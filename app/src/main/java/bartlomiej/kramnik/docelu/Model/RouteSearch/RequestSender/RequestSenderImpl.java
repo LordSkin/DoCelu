@@ -24,9 +24,8 @@ public class RequestSenderImpl implements Response.Listener<String>, Response.Er
     private final String baseURL = "https://maps.googleapis.com/maps/api/directions/json?" +
             "mode=transit&alternatives=false&key=AIzaSyBEeyifvklQ5NNCkKdQjdlRLNsJxbvCM6E";
 
-    public RequestSenderImpl(Context context, RouteFinderResponseListener listener) {
+    public RequestSenderImpl(Context context) {
         this.context = context;
-        this.listener = listener;
     }
 
     /**
@@ -35,8 +34,9 @@ public class RequestSenderImpl implements Response.Listener<String>, Response.Er
      * @param dest
      */
     @Override
-    public void sendRequest(MyPlace origin, MyPlace dest)//sending request to google directions api
+    public void sendRequest(MyPlace origin, MyPlace dest, RouteFinderResponseListener listener)//sending request to google directions api
     {
+        this.listener = listener;
         if(origin==null||dest==null){
             listener.error(new NullPointerException("Null Place"));
             return;

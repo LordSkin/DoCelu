@@ -37,9 +37,6 @@ public class SearchActivityImpl extends AppCompatActivity implements SearchView,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        SearchComponent component = DaggerSearchComponent.builder().build();
-        component.inject(this);
-
         setContentView(R.layout.activity_search);
         from = (TextView) findViewById(R.id.fromTextView);
         where = (TextView) findViewById(R.id.whereTextView);
@@ -49,6 +46,8 @@ public class SearchActivityImpl extends AppCompatActivity implements SearchView,
         searchButton.setOnClickListener(this);
         presenter = new SearchPresenterImpl();
 
+        SearchPresenterModule module = new SearchPresenterModule(this);
+        DaggerSearchComponent.builder().searchPresenterModule(module).build().inject((SearchPresenterImpl) presenter);
     }
 
     @Override
@@ -91,6 +90,6 @@ public class SearchActivityImpl extends AppCompatActivity implements SearchView,
     //for search button
     @Override
     public void onClick(View v) {
-
+        int i =0;
     }
 }

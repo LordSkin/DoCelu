@@ -1,5 +1,9 @@
 package bartlomiej.kramnik.docelu.Search.Dagger;
 
+import bartlomiej.kramnik.docelu.Model.DataBase.LastPlaces;
+import bartlomiej.kramnik.docelu.Model.RouteSearch.RequestSender.RequestSender;
+import bartlomiej.kramnik.docelu.Model.RouteSearch.RequestSender.RequestSenderImpl;
+import bartlomiej.kramnik.docelu.Search.View.SearchActivityImpl;
 import bartlomiej.kramnik.docelu.Search.View.SearchView;
 import dagger.Module;
 import dagger.Provides;
@@ -12,9 +16,13 @@ import dagger.Provides;
 public class SearchPresenterModule {
 
     private SearchView view;
+    private LastPlaces lastPlaces;
+    private RequestSender requestSender;
 
-    public SearchPresenterModule(SearchView view) {
-        this.view = view;
+    public SearchPresenterModule(SearchActivityImpl activity) {
+        this.view = activity;
+        this.lastPlaces = new LastPlaces(activity);
+        this.requestSender = new RequestSenderImpl(activity);
     }
 
     @Provides
@@ -22,4 +30,13 @@ public class SearchPresenterModule {
         return view;
     }
 
+    @Provides
+    LastPlaces provideLastPlaces(){
+        return  lastPlaces;
+    }
+
+    @Provides
+    RequestSender provideRequestSender(){
+        return  requestSender;
+    }
 }

@@ -1,5 +1,6 @@
 package bartlomiej.kramnik.docelu.Search.Dagger;
 
+import bartlomiej.kramnik.docelu.Search.Presenter.SearchPresenterImpl;
 import bartlomiej.kramnik.docelu.Search.View.SearchActivityImpl;
 import dagger.Component;
 import dagger.Provides;
@@ -10,5 +11,5 @@ import dagger.Provides;
 
 @Component(modules = SearchPresenterModule.class)
 public interface SearchComponent {
-    void inject(SearchActivityImpl activity);
+    void inject(SearchPresenterImpl presenter);
 }
