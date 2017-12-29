@@ -8,6 +8,7 @@
     android:orientation="vertical"
     tools:context=".Search.View.SearchActivityImpl">
 
+
     <fragment
         android:id="@+id/place_autocomplete_fragment"
         android:layout_width="match_parent"
@@ -15,10 +16,17 @@
         android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
         />
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="50">
+        android:id="@+id/last_places_list"
+        android:layout_height="0dp"
+        android:layout_weight=".3">
 
     </ListView>
 
@@ -26,24 +34,23 @@
         android:id="@+id/fromTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="25dp"
         android:gravity="center"
-        android:text="@string/lorem_ipsum"
-        android:layout_weight="10"/>
+        android:text="@string/lorem_ipsum"/>
 
     <TextView
         android:id="@+id/whereTextView"
         android:layout_width="match_parent"
         android:gravity="center"
+        android:textSize="25dp"
         android:layout_height="wrap_content"
-        android:text="@string/lorem_ipsum"
-        android:layout_weight="10"/>
+        android:text="@string/lorem_ipsum"/>
 
     <Button
         android:id="@+id/searchButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/lorem_ipsum"/>
-
 
 
 </LinearLayout>

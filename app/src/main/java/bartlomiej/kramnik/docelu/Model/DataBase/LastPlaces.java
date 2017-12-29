@@ -24,13 +24,25 @@ public class LastPlaces {
 
     public void add(MyPlace myPlace) {
         if (myPlace==null) return;
-        MyPlace place = new MyPlace(placesList.size()>0 ? placesList.get(placesList.size()-1).getId()+1 : 0, myPlace.getDescription(), myPlace.getPlaceID());
-        placesList.add(place);
-        dataBaseConnector.addPlace(place);
-        if(placesList.size()>MAX_SIZE){
-            placesList.remove(0);
-            dataBaseConnector.deletePlace(0);
+
+        MyPlace place = new MyPlace(myPlace.getDescription(), myPlace.getPlaceID());
+        boolean isNew=true;
+
+        for (MyPlace temp : placesList){
+            if (temp.getPlaceID().equals(place.getPlaceID())){
+                isNew= false;
+                break;
+            }
         }
+        if (isNew){
+            placesList.add(place);
+            dataBaseConnector.addPlace(place);
+            if(placesList.size()>MAX_SIZE){
+                placesList.remove(0);
+                dataBaseConnector.deletePlace(0);
+            }
+        }
+
     }
 
     public List<MyPlace> getPlacesList(){

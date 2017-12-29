@@ -20,7 +20,6 @@ public class DataBaseConnectorImpl extends SQLiteOpenHelper implements DataBaseC
     private Context context;
 
     private String tableName = "Places";
-    private String idColumn = "id";
     private String placeIDColumn = "placeID";
     private String descriptionColumn = "description";
 
@@ -30,13 +29,13 @@ public class DataBaseConnectorImpl extends SQLiteOpenHelper implements DataBaseC
     }
 
     public DataBaseConnectorImpl(Context context) {
-        super(context, "PlacesDB.db", null, 13);
+        super(context, "PlacesDB.db", null, 14);
         this.context = context;
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String CREATE_PLACES_TABLE = "CREATE TABLE " + tableName + "(" + idColumn + " INTEGER PRIMARY KEY, " + descriptionColumn + " TEXT, "+ placeIDColumn +" TEXT)";
+        String CREATE_PLACES_TABLE = "CREATE TABLE " + tableName + "(" +  descriptionColumn + " TEXT, "+ placeIDColumn +" TEXT PRIMARY KEY)";
         sqLiteDatabase.execSQL(CREATE_PLACES_TABLE);
     }
 
@@ -51,12 +50,12 @@ public class DataBaseConnectorImpl extends SQLiteOpenHelper implements DataBaseC
         List<MyPlace> result = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT  * FROM " + tableName, null);
+        Cursor cursor = db.rawQuery("SELECT DISTINCT * FROM " + tableName, null);
 
         if(cursor.getCount()<1)return new ArrayList<>();
         if (cursor.moveToFirst()) {
             do {
-                MyPlace place = new MyPlace(cursor.getInt(0), cursor.getString(1),cursor.getString(2));
+                MyPlace place = new MyPlace(cursor.getString(0), cursor.getString(1));
                 result.add(place);
             }
             while (cursor.moveToNext());
@@ -79,7 +78,7 @@ public class DataBaseConnectorImpl extends SQLiteOpenHelper implements DataBaseC
         }
         cursor.moveToFirst();
         cursor.move(i);
-        MyPlace place = new MyPlace(cursor.getInt(0), cursor.getString(1), cursor.getString(2));
+        MyPlace place = new MyPlace(cursor.getString(0), cursor.getString(1));
         cursor.close();
         db.close();
         return place;
@@ -89,7 +88,6 @@ public class DataBaseConnectorImpl extends SQLiteOpenHelper implements DataBaseC
     public void addPlace(MyPlace p) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(idColumn, p.getId());
         values.put(descriptionColumn, p.getDescription());
         values.put(placeIDColumn, p.getPlaceID());
 
@@ -101,7 +99,7 @@ public class DataBaseConnectorImpl extends SQLiteOpenHelper implements DataBaseC
     public void clearPlaces() {
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL("DROP TABLE IF EXISTS " + tableName);
-        String CREATE_PLACES_TABLE = "CREATE TABLE " + tableName + "(" + idColumn + " INTEGER PRIMARY KEY, " + descriptionColumn + " TEXT, "+ placeIDColumn +" TEXT)";
+        String CREATE_PLACES_TABLE = "CREATE TABLE " + tableName + "(" +  descriptionColumn + " TEXT, "+ placeIDColumn +" TEXT PRIMARY KEY)";
         db.execSQL(CREATE_PLACES_TABLE);
         db.close();
     }
@@ -109,7 +107,7 @@ public class DataBaseConnectorImpl extends SQLiteOpenHelper implements DataBaseC
     @Override
     public void deletePlace(MyPlace p) {
         SQLiteDatabase db = getWritableDatabase();
-        db.delete(tableName, idColumn+" = "+p.getId(), null);
+        db.delete(tableName, placeIDColumn+" = "+p.getPlaceID(), null);
         db.close();
     }
 
@@ -121,7 +119,7 @@ public class DataBaseConnectorImpl extends SQLiteOpenHelper implements DataBaseC
 
         cursor.moveToFirst();
         cursor.move(i);
-        MyPlace place = new MyPlace(cursor.getInt(0), cursor.getString(1), cursor.getString(2));
+        MyPlace place = new MyPlace(cursor.getString(0), cursor.getString(1));
         deletePlace(place);
         cursor.close();
         db.close();

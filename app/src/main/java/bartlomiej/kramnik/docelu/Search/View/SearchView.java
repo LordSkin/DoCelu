@@ -6,15 +6,17 @@ import com.google.android.gms.location.places.Place;
 
 import java.util.List;
 
+import bartlomiej.kramnik.docelu.Model.DataModels.Route;
+
 /**
  * Search Presenter Interface
  */
 
 public interface SearchView {
 
-    public void showError(Error e);
+    public void showError(int e);
 
-    public void loadList(List<Place> places);
+    public void reLoadList();
 
     public void showFrom(String s);
 
@@ -22,5 +24,9 @@ public interface SearchView {
 
     public Context getContext();
 
+    public void startActivity(Route route);
 
+    public void showLoadingIndicator();
+
+    public void hideLoadingIndicator();
 }

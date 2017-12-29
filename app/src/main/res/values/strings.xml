@@ -2,4 +2,6 @@
     <string name="app_name">DoCelu</string>
     <string name="lorem_ipsum">Lorem Ipsum</string>
     <string name="error">Coś poszło nie tak :/</string>
+    <string name="emptyPlace">Wypełnij najpierw oba pola!</string>
+    <string name="routeNotFound">Nie znaleziono trasy :/</string>
 </resources>

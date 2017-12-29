@@ -32,7 +32,9 @@ public class JsonResponseInterpreter {
                     json = json.getJSONObject("transit_details");
                     lines.add(new Line(json.getJSONObject("line").getString("short_name"),
                             json.getJSONObject("departure_stop").getString("name"),
-                            json.getJSONObject("arrival_stop").getString("name")));
+                            json.getJSONObject("arrival_stop").getString("name"),
+                            json.getInt("num_stops"),
+                            json.getJSONObject("line").getJSONObject("vehicle").getString("type")));
                 }
             }
             return new Route(lines);
