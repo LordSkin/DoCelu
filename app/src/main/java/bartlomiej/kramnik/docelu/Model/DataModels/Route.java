@@ -1,12 +1,13 @@
 package bartlomiej.kramnik.docelu.Model.DataModels;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Data model represents single route
  */
 
-public class Route {
+public class Route implements Serializable {
     private List<Line> lineList;
 
     public Route(List<Line> stops) {

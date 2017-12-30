@@ -1,6 +1,7 @@
 package bartlomiej.kramnik.docelu.Search.View;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -27,6 +28,7 @@ import bartlomiej.kramnik.docelu.Search.Dagger.SearchComponent;
 import bartlomiej.kramnik.docelu.Search.Dagger.SearchPresenterModule;
 import bartlomiej.kramnik.docelu.Search.Presenter.SearchPresenter;
 import bartlomiej.kramnik.docelu.Search.Presenter.SearchPresenterImpl;
+import bartlomiej.kramnik.docelu.ShowRoute.View.ShowRouteActivityImpl;
 
 public class SearchActivityImpl extends AppCompatActivity implements SearchView, PlaceSelectionListener, View.OnClickListener, AdapterView.OnItemClickListener {
 
@@ -90,7 +92,10 @@ public class SearchActivityImpl extends AppCompatActivity implements SearchView,
 
     @Override
     public void startActivity(Route route) {
-        Toast.makeText(this, "startactivity", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, ShowRouteActivityImpl.class);
+        intent.putExtra("route", route);
+        startActivity(intent);
+
     }
 
     @Override

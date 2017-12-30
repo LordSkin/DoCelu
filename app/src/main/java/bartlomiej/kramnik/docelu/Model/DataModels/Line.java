@@ -1,10 +1,12 @@
 package bartlomiej.kramnik.docelu.Model.DataModels;
 
+import java.io.Serializable;
+
 /**
  * Data model represents Line
  */
 
-public class Line {
+public class Line implements Serializable {
 
     public static int BUS = 0;
     public static int TRAMWAJ = 1;

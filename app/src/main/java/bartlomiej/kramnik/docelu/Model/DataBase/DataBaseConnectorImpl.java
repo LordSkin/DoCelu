@@ -29,7 +29,7 @@ public class DataBaseConnectorImpl extends SQLiteOpenHelper implements DataBaseC
     }
 
     public DataBaseConnectorImpl(Context context) {
-        super(context, "PlacesDB.db", null, 14);
+        super(context, "PlacesDB.db", null, 15);
         this.context = context;
     }
 
@@ -88,8 +88,9 @@ public class DataBaseConnectorImpl extends SQLiteOpenHelper implements DataBaseC
     public void addPlace(MyPlace p) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(descriptionColumn, p.getDescription());
         values.put(placeIDColumn, p.getPlaceID());
+        values.put(descriptionColumn, p.getDescription());
+
 
         db.insert(tableName, null, values);
         db.close();
