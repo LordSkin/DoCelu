@@ -3,10 +3,14 @@ package bartlomiej.kramnik.docelu.ShowRoute.Presenter;
 import android.graphics.drawable.Icon;
 import android.media.Image;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
+
+import java.util.zip.Inflater;
 
 import javax.inject.Inject;
 
@@ -33,36 +37,16 @@ public class ShowRoutePresenterImpl implements ShowRoutePresenter {
         LinearLayout linearLayout = new LinearLayout(view.getContext());
         linearLayout.setOrientation(LinearLayout.VERTICAL);
 
+        ScrollView scrollView = new ScrollView(view.getContext());
+        scrollView.addView(linearLayout);
+
+        LayoutInflater inflater = LayoutInflater.from(view.getContext());
+
         for(Line l : route.getLineList()){
-
-            ImageView arrow = new ImageView(view.getContext());
-            arrow.setImageResource(R.drawable.arrow_down);
-
-            LinearLayout cell = new LinearLayout(view.getContext());
-            cell.setOrientation(LinearLayout.HORIZONTAL);
-
-            TextView stopName = new TextView(view.getContext());
-            stopName.setText(l.getFrom());
-
-            ImageView vechicleType = new ImageView(view.getContext());
-            if(l.getVechicleType()==Line.BUS){
-                vechicleType.setImageResource(R.drawable.bus);
-            }
-            if(l.getVechicleType()==Line.TRAMWAJ){
-                vechicleType.setImageResource(R.drawable.tram);
-            }
-
-            TextView stopsNum = new TextView(view.getContext());
-            stopName.setText(l.getNumStops()+" przystanków");
-
-            cell.addView(stopName);
-            cell.addView(vechicleType);
-            cell.addView(stopsNum);
-
-            linearLayout.addView(arrow);
-            linearLayout.addView(cell);
+            linearLayout.addView(inflater.inflate(R.layout.arrow_down,null));
+            linearLayout.addView(l.getView(inflater));
         }
 
-        view.showView(linearLayout);
+        view.showView(scrollView);
     }
 }

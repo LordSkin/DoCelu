@@ -1,6 +1,15 @@
 package bartlomiej.kramnik.docelu.Model.DataModels;
 
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
+
 import java.io.Serializable;
+
+import bartlomiej.kramnik.docelu.R;
 
 /**
  * Data model represents Line
@@ -50,5 +59,17 @@ public class Line implements Serializable {
 
     public int getVechicleType() {
         return vechicleType;
+    }
+
+    public View getView(LayoutInflater inflater){
+        View result = inflater.inflate(R.layout.line_cell, null);
+        ((TextView)result.findViewById(R.id.from)).setText(from);
+        ((TextView)result.findViewById(R.id.where)).setText(where);
+        ((TextView)result.findViewById(R.id.lineName)).setText(name);
+        ((TextView)result.findViewById(R.id.numStops)).setText(numStops+" stops");
+
+        ((ImageView)result.findViewById(R.id.vechicleType)).setImageResource(vechicleType==Line.BUS ? R.drawable.bus : R.drawable.tram);
+
+        return  result;
     }
 }
