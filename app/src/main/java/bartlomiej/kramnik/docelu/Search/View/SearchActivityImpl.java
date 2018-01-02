@@ -24,6 +24,7 @@ import javax.inject.Inject;
 import bartlomiej.kramnik.docelu.Model.DataModels.Route;
 import bartlomiej.kramnik.docelu.R;
 import bartlomiej.kramnik.docelu.Search.Dagger.DaggerSearchComponent;
+import bartlomiej.kramnik.docelu.Search.Dagger.SearchAdapterModule;
 import bartlomiej.kramnik.docelu.Search.Dagger.SearchComponent;
 import bartlomiej.kramnik.docelu.Search.Dagger.SearchPresenterModule;
 import bartlomiej.kramnik.docelu.Search.Presenter.SearchPresenter;
@@ -56,11 +57,16 @@ public class SearchActivityImpl extends AppCompatActivity implements SearchView,
         autocompleteFragment.setOnPlaceSelectedListener(this);
         searchButton.setOnClickListener(this);
         presenter = new SearchPresenterImpl();
+        listAdapter = new ListAdapter(this);
 
         SearchPresenterModule module = new SearchPresenterModule(this);
-        DaggerSearchComponent.builder().searchPresenterModule(module).build().inject((SearchPresenterImpl) presenter);
+        SearchAdapterModule module2 = new SearchAdapterModule(presenter);
 
-        listAdapter = new ListAdapter(this,presenter);
+
+        SearchComponent component = DaggerSearchComponent.builder().searchPresenterModule(module).searchAdapterModule(module2).build();
+        component.inject((SearchPresenterImpl) presenter);
+        component.inject(listAdapter);
+
         lastPlacesList.setAdapter(listAdapter);
         lastPlacesList.setOnItemClickListener(this);
     }

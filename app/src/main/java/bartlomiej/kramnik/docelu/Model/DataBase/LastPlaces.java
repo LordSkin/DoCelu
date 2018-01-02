@@ -3,6 +3,7 @@ package bartlomiej.kramnik.docelu.Model.DataBase;
 import android.content.Context;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import bartlomiej.kramnik.docelu.Model.DataModels.MyPlace;
@@ -42,18 +43,24 @@ public class LastPlaces {
                 dataBaseConnector.deletePlace(0);
             }
         }
+        else {
+            dataBaseConnector.deletePlace(place);
+            dataBaseConnector.addPlace(place);
+            placesList = dataBaseConnector.getPlaces();
+        }
 
     }
 
     public List<MyPlace> getPlacesList(){
         List<MyPlace> temp = new ArrayList<>();
         temp.addAll(placesList);
+        Collections.reverse(temp);
         return temp;
     }
 
     public MyPlace get(int i){
         if(i>=placesList.size()||i<0) return null;
-        return placesList.get(i);
+        return placesList.get(placesList.size()-1-i);
     }
 
     public void clear(){

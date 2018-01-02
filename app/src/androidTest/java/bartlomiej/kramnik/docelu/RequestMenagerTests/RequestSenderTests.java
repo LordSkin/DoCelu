@@ -22,7 +22,7 @@ public class RequestSenderTests implements RouteFinderResponseListener {
     private RequestSender requestSender;
 
     public RequestSenderTests() {
-        requestSender = new RequestSenderImpl(InstrumentationRegistry.getTargetContext(), this);
+        requestSender = new RequestSenderImpl(InstrumentationRegistry.getTargetContext());
     }
 
     @Override
@@ -45,9 +45,9 @@ public class RequestSenderTests implements RouteFinderResponseListener {
     @Test
     public void findRouteTest1(){
         try {
-            MyPlace place1 = new MyPlace(0, "desc", "ChIJsX84rg7qD0cRbdGJB9nC90U");
-            MyPlace place2 = new MyPlace(1, "desc2", "ChIJN4s1SMnpD0cRovXBrvxjVA8");
-            requestSender.sendRequest(place1, place2);
+            MyPlace place1 = new MyPlace( "desc", "ChIJsX84rg7qD0cRbdGJB9nC90U");
+            MyPlace place2 = new MyPlace( "desc2", "ChIJN4s1SMnpD0cRovXBrvxjVA8");
+            requestSender.sendRequest(place1, place2, this);
             Thread.sleep(1000);
         }
         catch (InterruptedException e) {
@@ -59,7 +59,7 @@ public class RequestSenderTests implements RouteFinderResponseListener {
     @Test
     public void nullTest(){
         try {
-            requestSender.sendRequest(null,null);
+            requestSender.sendRequest(null,null, this);
             Thread.sleep(1000);
         }
         catch (InterruptedException e) {

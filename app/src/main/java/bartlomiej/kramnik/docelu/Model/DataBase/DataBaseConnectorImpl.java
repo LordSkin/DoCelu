@@ -108,7 +108,7 @@ public class DataBaseConnectorImpl extends SQLiteOpenHelper implements DataBaseC
     @Override
     public void deletePlace(MyPlace p) {
         SQLiteDatabase db = getWritableDatabase();
-        db.delete(tableName, placeIDColumn+" = "+p.getPlaceID(), null);
+        db.delete(tableName, placeIDColumn+" = \""+p.getPlaceID()+"\"", null);
         db.close();
     }
 

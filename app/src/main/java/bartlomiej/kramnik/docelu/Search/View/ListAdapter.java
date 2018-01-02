@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import bartlomiej.kramnik.docelu.Model.DataModels.MyPlace;
 import bartlomiej.kramnik.docelu.R;
 import bartlomiej.kramnik.docelu.Search.Presenter.SearchPresenter;
@@ -20,11 +22,12 @@ import bartlomiej.kramnik.docelu.Search.Presenter.SearchPresenter;
 
 public class ListAdapter extends BaseAdapter {
 
-    private SearchPresenter presenter;
+    @Inject
+    SearchPresenter presenter;
+
     private LayoutInflater infalter;
 
-    public ListAdapter(Context context, SearchPresenter presenter) {
-        this.presenter = presenter;
+    public ListAdapter(Context context) {
         this.infalter = LayoutInflater.from(context);
     }
 
@@ -35,7 +38,7 @@ public class ListAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return presenter.getLastPlace(presenter.getlastPlacesCount()-position-1);
+        return presenter.getLastPlace(position);
     }
 
     @Override
@@ -47,7 +50,7 @@ public class ListAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         convertView = infalter.inflate(R.layout.list_row_simple, parent, false);
         TextView textView = (TextView)convertView.findViewById(R.id.text);
-        textView.setText(presenter.getLastPlace(presenter.getlastPlacesCount()-position-1).getDescription());
+        textView.setText(presenter.getLastPlace(position).getDescription());
         return  convertView;
     }
 }

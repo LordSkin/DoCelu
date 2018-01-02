@@ -57,8 +57,8 @@ public class DataBaseConnectorTests {
         {
             dataBaseConnector = new DataBaseConnectorImpl(context);
             dataBaseConnector.clearPlaces();
-            MyPlace testPlace = new MyPlace(0, "dfytvescription", "id");
-            MyPlace testPlace2 = new MyPlace(1, "deshgvhgcription", "id");
+            MyPlace testPlace = new MyPlace( "dfytvescription", "id");
+            MyPlace testPlace2 = new MyPlace("deshgvhgcription", "id");
             dataBaseConnector.addPlace(testPlace);
             dataBaseConnector.addPlace(testPlace2);
         }
@@ -88,8 +88,8 @@ public class DataBaseConnectorTests {
         {
             dataBaseConnector = new DataBaseConnectorImpl(context);
             dataBaseConnector.clearPlaces();
-            MyPlace testPlace = new MyPlace(0, "dfytvescription", "id");
-            MyPlace testPlace2 = new MyPlace(1, "dfytvrgrtgiption", "id2");
+            MyPlace testPlace = new MyPlace( "dfytvescription", "id");
+            MyPlace testPlace2 = new MyPlace( "dfytvrgrtgiption", "id2");
             dataBaseConnector.addPlace(testPlace);
             dataBaseConnector.addPlace(testPlace2);
             Assert.assertEquals(testPlace, dataBaseConnector.getPlace(0));
@@ -119,8 +119,8 @@ public class DataBaseConnectorTests {
         try{
             dataBaseConnector = new DataBaseConnectorImpl(context);
             dataBaseConnector.clearPlaces();
-            MyPlace testPlace = new MyPlace(0, "dfytvescription", "id");
-            MyPlace testPlace2 = new MyPlace(1, "dfytvrgrtgiption", "id2");
+            MyPlace testPlace = new MyPlace( "dfytvescription", "id");
+            MyPlace testPlace2 = new MyPlace("dfytvrgrtgiption", "id2");
             dataBaseConnector.addPlace(testPlace);
             dataBaseConnector.addPlace(testPlace2);
 
@@ -152,8 +152,8 @@ public class DataBaseConnectorTests {
         try{
             dataBaseConnector = new DataBaseConnectorImpl(context);
             dataBaseConnector.clearPlaces();
-            MyPlace testPlace = new MyPlace(0, "dfytvescription", "id");
-            MyPlace testPlace2 = new MyPlace(1, "dfytvrgrtgiption", "id2");
+            MyPlace testPlace = new MyPlace( "dfytvescription", "id");
+            MyPlace testPlace2 = new MyPlace( "dfytvrgrtgiption", "id2");
             dataBaseConnector.addPlace(testPlace);
             dataBaseConnector.addPlace(testPlace2);
 

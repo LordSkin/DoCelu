@@ -28,7 +28,7 @@ public class LastPlacesTests {
     @Test
     public void addTest(){
         try{
-            lastPlaces.add(new MyPlace(0, "desc", "asdaf"));
+            lastPlaces.add(new MyPlace( "desc", "asdaf"));
         }
         catch (Exception e){
             Assert.fail();
@@ -49,7 +49,7 @@ public class LastPlacesTests {
     public void getTest(){
         try{
             lastPlaces.clear();
-            MyPlace testPlace = new MyPlace(0, "desc", "asdaf");
+            MyPlace testPlace = new MyPlace( "desc", "asdaf");
             lastPlaces.add(testPlace);
             Assert.assertEquals(testPlace, lastPlaces.get(0));
         }
@@ -76,7 +76,7 @@ public class LastPlacesTests {
             List<MyPlace> places = lastPlaces.getPlacesList();
             Assert.assertEquals(places.size(), 0);
 
-            MyPlace testPlace = new MyPlace(0, "desc", "asdaf");
+            MyPlace testPlace = new MyPlace( "desc", "asdaf");
             lastPlaces.add(testPlace);
             Assert.assertEquals(1, lastPlaces.getPlacesList().size());
         }
@@ -89,13 +89,13 @@ public class LastPlacesTests {
     public void getListTest2(){
         try{
             lastPlaces.clear();
-            MyPlace testPlace = new MyPlace(0, "desc", "asdaf");
-            MyPlace testPlace2 = new MyPlace(1, "dfsdfesc", "idasdaf");
+            MyPlace testPlace = new MyPlace( "desc", "asdaf");
+            MyPlace testPlace2 = new MyPlace( "dfsdfesc", "idasdaf");
             lastPlaces.add(testPlace);
             lastPlaces.add(testPlace2);
 
-            Assert.assertEquals(testPlace, lastPlaces.getPlacesList().get(0));
-            Assert.assertEquals(testPlace2, lastPlaces.getPlacesList().get(1));
+            Assert.assertEquals(testPlace, lastPlaces.getPlacesList().get(1));
+            Assert.assertEquals(testPlace2, lastPlaces.getPlacesList().get(0));
         }
         catch (Exception e)
         {
