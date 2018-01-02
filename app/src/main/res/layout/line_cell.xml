@@ -15,6 +15,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:textColor="@color/colorPrimaryDark"
                 android:gravity="center"
                 android:textStyle="bold|italic"
                 android:id="@+id/lineName"
@@ -30,6 +31,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:textColor="@color/colorPrimaryDark"
                 android:gravity="center"
                 android:id="@+id/numStops"/>
 
@@ -43,6 +45,7 @@
 
             <TextView
                 android:layout_width="wrap_content"
+                android:textColor="@color/colorPrimaryDark"
                 android:gravity="center"
                 android:layout_height="match_parent"
                 android:id="@+id/from"/>
@@ -56,6 +59,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:textColor="@color/colorPrimaryDark"
                 android:gravity="center"
                 android:id="@+id/where"/>
 
