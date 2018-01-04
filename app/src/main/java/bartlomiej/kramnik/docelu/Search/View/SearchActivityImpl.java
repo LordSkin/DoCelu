@@ -97,9 +97,11 @@ public class SearchActivityImpl extends AppCompatActivity implements SearchView,
     }
 
     @Override
-    public void startActivity(Route route) {
+    public void startActivity(Route route, String from, String where) {
         Intent intent = new Intent(this, ShowRouteActivityImpl.class);
         intent.putExtra("route", route);
+        intent.putExtra("from", from);
+        intent.putExtra("where", where);
         startActivity(intent);
 
     }

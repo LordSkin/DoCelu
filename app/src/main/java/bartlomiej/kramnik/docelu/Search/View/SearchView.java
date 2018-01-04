@@ -24,7 +24,7 @@ public interface SearchView {
 
     public Context getContext();
 
-    public void startActivity(Route route);
+    public void startActivity(Route route, String from, String where);
 
     public void showLoadingIndicator();
 

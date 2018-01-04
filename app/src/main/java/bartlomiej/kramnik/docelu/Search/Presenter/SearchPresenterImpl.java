@@ -31,7 +31,7 @@ public class SearchPresenterImpl implements SearchPresenter, RouteFinderResponse
 
     @Override
     public void selectPlace(Place place) {
-        MyPlace temp = new MyPlace(place.getAddress().toString(), place.getId().toString());
+        MyPlace temp = new MyPlace(place.getName().toString(), place.getId().toString());
         if (from == null) {
             from = temp;
             view.showFrom(from.getDescription());
@@ -82,7 +82,7 @@ public class SearchPresenterImpl implements SearchPresenter, RouteFinderResponse
         lastPlaces.add(from);
         lastPlaces.add(where);
         view.hideLoadingIndicator();
-        view.startActivity(r);
+        view.startActivity(r, from.getDescription(), where.getDescription());
     }
 
     @Override

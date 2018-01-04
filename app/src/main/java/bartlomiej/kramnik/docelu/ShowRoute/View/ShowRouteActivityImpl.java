@@ -22,8 +22,10 @@ public class ShowRouteActivityImpl extends AppCompatActivity implements ShowRout
         //setContentView(R.layout.activity_show_route_impl);
 
         Route r = (Route) getIntent().getExtras().get("route");
+        String from = getIntent().getStringExtra("from");
+        String where = getIntent().getStringExtra("where");
 
-        presenter = new ShowRoutePresenterImpl();
+        presenter = new ShowRoutePresenterImpl(from, where);
 
         DaggerShowRouteViewComponent.builder().showRoutePresenterModule(new ShowRoutePresenterModule(this, r)).build().inject((ShowRoutePresenterImpl) presenter);
 

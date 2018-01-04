@@ -3,18 +3,21 @@ package bartlomiej.kramnik.docelu.Model.DataModels;
 import java.io.Serializable;
 import java.util.List;
 
+import bartlomiej.kramnik.docelu.Model.DataModels.Transport.Line;
+import bartlomiej.kramnik.docelu.Model.DataModels.Transport.Transport;
+
 /**
  * Data model represents single route
  */
 
 public class Route implements Serializable {
-    private List<Line> lineList;
+    private List<Transport> lineList;
 
-    public Route(List<Line> stops) {
+    public Route(List<Transport> stops) {
         this.lineList = stops;
     }
 
-    public List<Line> getLineList() {
+    public List<Transport> getLineList() {
         return lineList;
     }
 
@@ -22,11 +25,11 @@ public class Route implements Serializable {
         return lineList.size();
     }
 
-    public Line getFirst(){
+    public Transport getFirst(){
         return lineList.get(0);
     }
 
-    public Line getLast(){
+    public Transport getLast(){
         return lineList.get(lineList.size()-1);
     }
 }

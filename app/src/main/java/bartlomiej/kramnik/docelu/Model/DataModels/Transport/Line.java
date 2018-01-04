@@ -1,11 +1,9 @@
-package bartlomiej.kramnik.docelu.Model.DataModels;
+package bartlomiej.kramnik.docelu.Model.DataModels.Transport;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.io.Serializable;
 
@@ -15,7 +13,7 @@ import bartlomiej.kramnik.docelu.R;
  * Data model represents Line
  */
 
-public class Line implements Serializable {
+public class Line extends Transport implements Serializable {
 
     public static int BUS = 0;
     public static int TRAMWAJ = 1;
@@ -61,6 +59,7 @@ public class Line implements Serializable {
         return vechicleType;
     }
 
+    @Override
     public View getView(LayoutInflater inflater){
         View result = inflater.inflate(R.layout.line_cell, null);
         ((TextView)result.findViewById(R.id.from)).setText(from);

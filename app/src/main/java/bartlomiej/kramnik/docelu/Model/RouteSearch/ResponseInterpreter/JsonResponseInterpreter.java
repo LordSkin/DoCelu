@@ -6,8 +6,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import bartlomiej.kramnik.docelu.Model.DataModels.Line;
+import bartlomiej.kramnik.docelu.Model.DataModels.Transport.Line;
 import bartlomiej.kramnik.docelu.Model.DataModels.Route;
+import bartlomiej.kramnik.docelu.Model.DataModels.Transport.Transport;
+import bartlomiej.kramnik.docelu.Model.DataModels.Transport.Walking;
 
 /**
  * Interpreting response from google API
@@ -24,7 +26,7 @@ public class JsonResponseInterpreter {
             json = array.getJSONObject(0);
             array = json.getJSONArray("steps");
 
-            List<Line> lines = new ArrayList<>();
+            List<Transport> lines = new ArrayList<>();
             for (int i = 0; i < array.length(); i++) {
                 json = array.getJSONObject(i);
                 String type = json.getString("travel_mode");
@@ -36,6 +38,9 @@ public class JsonResponseInterpreter {
                             json.getJSONObject("arrival_stop").getString("name"),
                             json.getInt("num_stops"),
                             json.getJSONObject("line").getJSONObject("vehicle").getString("type")));
+                }
+                if (type.equals("WALKING")){
+                    lines.add(new Walking(json.getString("html_instructions")));
                 }
             }
             return new Route(lines);
