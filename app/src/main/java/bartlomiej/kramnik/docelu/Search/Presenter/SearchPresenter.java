@@ -14,4 +14,6 @@ public interface SearchPresenter {
     public void search();
     public MyPlace getLastPlace(int id);
     public int getlastPlacesCount();
+    public void useLocation();
+    public void permissionResponse(int requestCode, String permissions[], int[] grantResults);
 }

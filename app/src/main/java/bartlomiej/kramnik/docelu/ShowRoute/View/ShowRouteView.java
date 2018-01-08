@@ -11,4 +11,6 @@ public interface ShowRouteView {
     public void showView(View view);
 
     public Context getContext();
+
+    public void showError(String error);
 }

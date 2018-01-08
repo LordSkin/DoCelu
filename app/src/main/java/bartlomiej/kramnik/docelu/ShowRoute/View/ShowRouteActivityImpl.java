@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import bartlomiej.kramnik.docelu.Model.DataModels.Route;
 import bartlomiej.kramnik.docelu.R;
@@ -43,4 +44,10 @@ public class ShowRouteActivityImpl extends AppCompatActivity implements ShowRout
     public Context getContext() {
         return getApplicationContext();
     }
+
+    @Override
+    public void showError(String error) {
+        Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
+    }
+
 }

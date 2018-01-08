@@ -2,6 +2,7 @@ package bartlomiej.kramnik.docelu.Search.View;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -39,6 +40,7 @@ public class SearchActivityImpl extends AppCompatActivity implements SearchView,
     ListView lastPlacesList;
     ListAdapter listAdapter;
     ProgressBar progressBar;
+    FloatingActionButton locationButton;
 
 
     SearchPresenter presenter;
@@ -52,9 +54,11 @@ public class SearchActivityImpl extends AppCompatActivity implements SearchView,
         where = (TextView) findViewById(R.id.whereTextView);
         searchButton = (Button) findViewById(R.id.searchButton);
         lastPlacesList = (ListView) findViewById(R.id.last_places_list);
+        locationButton = (FloatingActionButton) findViewById(R.id.localisation);
         progressBar = (ProgressBar)findViewById(R.id.progressBar);
         autocompleteFragment = (PlaceAutocompleteFragment) getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
         autocompleteFragment.setOnPlaceSelectedListener(this);
+        locationButton.setOnClickListener(this);
         searchButton.setOnClickListener(this);
         presenter = new SearchPresenterImpl();
         listAdapter = new ListAdapter(this);
@@ -130,13 +134,25 @@ public class SearchActivityImpl extends AppCompatActivity implements SearchView,
 
     //for search button
     @Override
-    public void onClick(View v) {
-        presenter.search();
+    public void onClick(View view) {
+        if(view.getId()==R.id.searchButton){
+            //presenter.search();
+        }
+        if (view.getId()==R.id.localisation){
+            presenter.useLocation();
+        }
+
     }
 
     //clicked item in list
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         presenter.selectFromList(position);
+    }
+
+    //required to obtain permissions
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults){
+        presenter.permissionResponse(requestCode, permissions, grantResults);
     }
 }

@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import javax.inject.Inject;
 
-import bartlomiej.kramnik.docelu.Model.DataModels.Transport.Line;
 import bartlomiej.kramnik.docelu.Model.DataModels.Route;
 import bartlomiej.kramnik.docelu.Model.DataModels.Transport.Transport;
 import bartlomiej.kramnik.docelu.R;

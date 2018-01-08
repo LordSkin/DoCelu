@@ -1,5 +1,7 @@
 package bartlomiej.kramnik.docelu.Search.Presenter;
 
+import android.location.Location;
+
 import com.google.android.gms.location.places.Place;
 
 import javax.inject.Inject;
@@ -7,6 +9,11 @@ import javax.inject.Inject;
 import bartlomiej.kramnik.docelu.Model.DataBase.LastPlaces;
 import bartlomiej.kramnik.docelu.Model.DataModels.MyPlace;
 import bartlomiej.kramnik.docelu.Model.DataModels.Route;
+import bartlomiej.kramnik.docelu.Model.Location.LocationManager.LocationHelper;
+import bartlomiej.kramnik.docelu.Model.Location.LocationManager.LocationHelperImpl;
+import bartlomiej.kramnik.docelu.Model.Location.LocationManager.LocationMangerListener;
+import bartlomiej.kramnik.docelu.Model.Location.PermissionHelper.PermissionHelper;
+import bartlomiej.kramnik.docelu.Model.Location.PermissionHelper.PermissionRequestResponseListener;
 import bartlomiej.kramnik.docelu.Model.RouteSearch.RequestSender.RequestSender;
 import bartlomiej.kramnik.docelu.Model.RouteSearch.RouteFinderResponseListener;
 import bartlomiej.kramnik.docelu.R;
@@ -16,7 +23,7 @@ import bartlomiej.kramnik.docelu.Search.View.SearchView;
  * Implementation of search presenter
  */
 
-public class SearchPresenterImpl implements SearchPresenter, RouteFinderResponseListener {
+public class SearchPresenterImpl implements SearchPresenter, RouteFinderResponseListener, PermissionRequestResponseListener, LocationMangerListener {
 
     @Inject
     SearchView view;
@@ -26,6 +33,12 @@ public class SearchPresenterImpl implements SearchPresenter, RouteFinderResponse
 
     @Inject
     RequestSender requestSender;
+
+    @Inject
+    PermissionHelper permissionHelper;
+
+    @Inject
+    LocationHelper locationHelper;
 
     private MyPlace from, where;
 
@@ -76,6 +89,23 @@ public class SearchPresenterImpl implements SearchPresenter, RouteFinderResponse
         return lastPlaces.getPlacesList().size();
     }
 
+    @Override
+    public void useLocation() {
+        if (permissionHelper.chechkLocationPermission()){
+            view.showLoadingIndicator();
+            locationHelper.getLocation(this);
+        }
+        else {
+            permissionHelper.requestPermission(this);    
+        }
+        
+    }
+
+    @Override
+    public void permissionResponse(int requestCode, String[] permissions, int[] grantResults) {
+        permissionHelper.permissionResult(requestCode, permissions, grantResults);
+    }
+
     //from requestSender
     @Override
     public void routeFound(Route r) {
@@ -95,5 +125,33 @@ public class SearchPresenterImpl implements SearchPresenter, RouteFinderResponse
     public void error(Exception e) {
         view.hideLoadingIndicator();
         view.showError(R.string.error);
+    }
+
+
+    // permision requests
+    @Override
+    public void permissionsGranted() {
+        useLocation();
+    }
+
+    @Override
+    public void permissionsDenied() {
+        view.showError(R.string.permissionRequired);
+    }
+
+
+    //from locationHelper
+    @Override
+    public void locationFound(MyPlace place) {
+        lastPlaces.add(place);
+        from = place;
+        view.showWhere(place.getDescription());
+        view.hideLoadingIndicator();
+    }
+
+    @Override
+    public void locationError(Exception e) {
+        view.showError(R.string.error);
+        view.hideLoadingIndicator();
     }
 }

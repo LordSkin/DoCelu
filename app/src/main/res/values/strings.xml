@@ -5,4 +5,5 @@
     <string name="error">Coś poszło nie tak :/</string>
     <string name="emptyPlace">Wypełnij najpierw oba pola!</string>
     <string name="routeNotFound">Nie znaleziono trasy :/</string>
+    <string name="permissionRequired">Bez nadania uprawnień nie można okreslić lokalizacji!</string>
 </resources>

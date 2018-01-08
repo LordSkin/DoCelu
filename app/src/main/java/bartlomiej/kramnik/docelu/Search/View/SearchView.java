@@ -14,6 +14,7 @@ import bartlomiej.kramnik.docelu.Model.DataModels.Route;
 
 public interface SearchView {
 
+
     public void showError(int e);
 
     public void reLoadList();
