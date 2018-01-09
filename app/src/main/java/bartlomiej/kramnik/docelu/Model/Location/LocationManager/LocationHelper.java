@@ -8,4 +8,8 @@ import android.location.Location;
 
 public interface LocationHelper {
     public void getLocation(LocationMangerListener listener);
+
+    public boolean isEnabled();
+
+    public void enable();
 }

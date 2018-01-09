@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.AutocompleteFilter;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
 import com.google.android.gms.location.places.ui.PlaceSelectionListener;
@@ -32,15 +33,16 @@ import bartlomiej.kramnik.docelu.Search.Presenter.SearchPresenter;
 import bartlomiej.kramnik.docelu.Search.Presenter.SearchPresenterImpl;
 import bartlomiej.kramnik.docelu.ShowRoute.View.ShowRouteActivityImpl;
 
+import static com.google.android.gms.location.places.AutocompleteFilter.TYPE_FILTER_CITIES;
+
 public class SearchActivityImpl extends AppCompatActivity implements SearchView, PlaceSelectionListener, View.OnClickListener, AdapterView.OnItemClickListener {
 
     PlaceAutocompleteFragment autocompleteFragment;
     TextView from, where;
-    Button searchButton;
     ListView lastPlacesList;
     ListAdapter listAdapter;
     ProgressBar progressBar;
-    FloatingActionButton locationButton;
+    FloatingActionButton locationButton ,searchButton;
 
 
     SearchPresenter presenter;
@@ -52,12 +54,19 @@ public class SearchActivityImpl extends AppCompatActivity implements SearchView,
         setContentView(R.layout.activity_search);
         from = (TextView) findViewById(R.id.fromTextView);
         where = (TextView) findViewById(R.id.whereTextView);
-        searchButton = (Button) findViewById(R.id.searchButton);
+        searchButton = (FloatingActionButton) findViewById(R.id.searchButton);
         lastPlacesList = (ListView) findViewById(R.id.last_places_list);
         locationButton = (FloatingActionButton) findViewById(R.id.localisation);
         progressBar = (ProgressBar)findViewById(R.id.progressBar);
         autocompleteFragment = (PlaceAutocompleteFragment) getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
         autocompleteFragment.setOnPlaceSelectedListener(this);
+
+        AutocompleteFilter typeFilter = new AutocompleteFilter.Builder()
+                .setTypeFilter(AutocompleteFilter.TYPE_FILTER_ADDRESS)
+                .setCountry("PL")
+                .build();
+        autocompleteFragment.setFilter(typeFilter);
+        
         locationButton.setOnClickListener(this);
         searchButton.setOnClickListener(this);
         presenter = new SearchPresenterImpl();
@@ -136,7 +145,7 @@ public class SearchActivityImpl extends AppCompatActivity implements SearchView,
     @Override
     public void onClick(View view) {
         if(view.getId()==R.id.searchButton){
-            //presenter.search();
+            presenter.search();
         }
         if (view.getId()==R.id.localisation){
             presenter.useLocation();

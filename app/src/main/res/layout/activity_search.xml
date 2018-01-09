@@ -31,6 +31,9 @@
 
     <ListView
         android:layout_width="match_parent"
+        android:layout_marginRight="@dimen/standard_margin"
+        android:layout_marginLeft="@dimen/standard_margin"
+        android:layout_marginBottom="@dimen/standard_margin"
         android:id="@+id/last_places_list"
         android:layout_height="0dp"
         android:layout_weight=".3">
@@ -42,32 +45,36 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="25dp"
-        android:gravity="center"
-        android:text="@string/lorem_ipsum"/>
+        android:layout_margin="@dimen/small_margin"
+        android:hint="@string/fromHint"
+        android:textAlignment="textStart" />
 
     <TextView
         android:id="@+id/whereTextView"
         android:layout_width="match_parent"
-        android:gravity="center"
+        android:layout_margin="@dimen/small_margin"
+        android:hint="@string/whereHint"
+        android:textAlignment="textStart"
         android:textSize="25dp"
-        android:layout_height="wrap_content"
-        android:text="@string/lorem_ipsum"/>
-
-
-    <Button
-        android:id="@+id/searchButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/lorem_ipsum"/>
-
-
+        android:layout_height="wrap_content"/>
 </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/localisation"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
+        android:layout_margin="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/bus" />
+        android:src="@drawable/location_icon" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/searchButton"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="80dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/search_icon" />
 </RelativeLayout>

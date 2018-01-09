@@ -22,7 +22,7 @@ public class RequestSenderImpl implements Response.Listener<String>, Response.Er
     private Context context;
     private RouteFinderResponseListener listener;
     private final String baseURL = "https://maps.googleapis.com/maps/api/directions/json?" +
-            "mode=transit&alternatives=false&key=AIzaSyBEeyifvklQ5NNCkKdQjdlRLNsJxbvCM6E";
+            "mode=transit&alternatives=false&language=pl&key=AIzaSyBEeyifvklQ5NNCkKdQjdlRLNsJxbvCM6E";
 
     public RequestSenderImpl(Context context) {
         this.context = context;

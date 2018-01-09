@@ -33,6 +33,7 @@ public class LocationHelperImpl implements LocationListener, LocationHelper, Pla
     private long minTime = 60000; //minimum time interval between location updates, in milliseconds
     private float minDist = 1000; //minimum distance between location updates, in meters
     private PlaceHelper placeHelper;
+    private boolean isEnabled;
 
     private static LocationHelper locationHelperSingleton;
 
@@ -48,13 +49,12 @@ public class LocationHelperImpl implements LocationListener, LocationHelper, Pla
 
 
     private LocationHelperImpl(Context context) {
+        isEnabled = false;
         if(context!=null)
         {
             placeHelper = new PlaceHelperImpl(context);
             this.context = context;
-            locationManager = (LocationManager) context.getSystemService(LOCATION_SERVICE);
-            locationManager.requestLocationUpdates(locationManager.GPS_PROVIDER, minTime, minDist, this);
-            location = getLastKnownLocation();
+
         }
     }
 
@@ -94,10 +94,25 @@ public class LocationHelperImpl implements LocationListener, LocationHelper, Pla
 
     }
 
+    //geting location methods
+
     @Override
     public void getLocation(LocationMangerListener listener) {
         this.listener = listener;
         placeHelper.getPlace(location, this);
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return isEnabled;
+    }
+
+    @Override
+    public void enable() {
+        locationManager = (LocationManager) context.getSystemService(LOCATION_SERVICE);
+        locationManager.requestLocationUpdates(locationManager.GPS_PROVIDER, minTime, minDist, this);
+        location = getLastKnownLocation();
+        isEnabled = true;
     }
 
     //responses from google api

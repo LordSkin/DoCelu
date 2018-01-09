@@ -93,6 +93,7 @@ public class SearchPresenterImpl implements SearchPresenter, RouteFinderResponse
     public void useLocation() {
         if (permissionHelper.chechkLocationPermission()){
             view.showLoadingIndicator();
+            if(!locationHelper.isEnabled()) locationHelper.enable();
             locationHelper.getLocation(this);
         }
         else {
@@ -143,9 +144,8 @@ public class SearchPresenterImpl implements SearchPresenter, RouteFinderResponse
     //from locationHelper
     @Override
     public void locationFound(MyPlace place) {
-        lastPlaces.add(place);
         from = place;
-        view.showWhere(place.getDescription());
+        view.showFrom(place.getDescription());
         view.hideLoadingIndicator();
     }
 

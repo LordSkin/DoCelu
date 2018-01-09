@@ -6,4 +6,6 @@
     <string name="emptyPlace">Wypełnij najpierw oba pola!</string>
     <string name="routeNotFound">Nie znaleziono trasy :/</string>
     <string name="permissionRequired">Bez nadania uprawnień nie można okreslić lokalizacji!</string>
+    <string name="fromHint">Z...</string>
+    <string name="whereHint">Do...</string>
 </resources>

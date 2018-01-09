@@ -48,7 +48,7 @@ public class PlaceHelperImpl implements Response.Listener<String>, Response.Erro
     @Override
     public void onResponse(String response) {
         MyPlace result = PlaceInterpreter.getMyPlace(response);
-        if(response==null){
+        if(result==null){
             listener.error(new Exception("interpreter error"));
         }
         else {

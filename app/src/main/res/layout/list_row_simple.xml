@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="@dimen/big_font"
+        android:textSize="@dimen/medium_font"
         android:id="@+id/text"/>
 
 </LinearLayout>
