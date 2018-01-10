@@ -28,6 +28,7 @@ public class PlaceHelperImpl implements Response.Listener<String>, Response.Erro
 
     @Override
     public void getPlace(Location location, PlaceResponseListener listener) {
+        if(listener==null) return;
         this.listener = listener;
         if (location == null) {
             listener.error(new NullPointerException("null Location"));

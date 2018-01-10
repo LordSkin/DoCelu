@@ -96,6 +96,9 @@ public class LocationHelperImpl implements LocationListener, LocationHelper, Pla
 
     @Override
     public void getLocation(LocationMangerListener listener) {
+        if (!isEnabled||listener==null){
+            return;
+        }
         this.listener = listener;
         placeHelper.getPlace(location, this);
     }

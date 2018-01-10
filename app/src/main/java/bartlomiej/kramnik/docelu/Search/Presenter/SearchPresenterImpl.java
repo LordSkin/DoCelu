@@ -56,7 +56,8 @@ public class SearchPresenterImpl implements SearchPresenter, RouteFinderResponse
             view.showFrom(from.getDescription());
             selected = SELECTED_WHERE;
             view.selectWhere();
-        } else {
+        }
+        else {
             where = temp;
             view.showWhere(where.getDescription());
         }
@@ -114,7 +115,8 @@ public class SearchPresenterImpl implements SearchPresenter, RouteFinderResponse
             view.showLoadingIndicator();
             if (!locationHelper.isEnabled()) locationHelper.enable();
             locationHelper.getLocation(this);
-        } else {
+        }
+        else {
             permissionHelper.requestPermission(this);
         }
 
