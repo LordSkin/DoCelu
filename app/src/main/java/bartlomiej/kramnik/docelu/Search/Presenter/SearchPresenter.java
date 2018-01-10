@@ -10,10 +10,20 @@ import bartlomiej.kramnik.docelu.Model.DataModels.MyPlace;
 
 public interface SearchPresenter {
     public void selectPlace(Place place);
+
     public void selectFromList(int id);
+
+    public void fromSelected();
+
+    public void whereSelected();
+
     public void search();
+
     public MyPlace getLastPlace(int id);
+
     public int getlastPlacesCount();
+
     public void useLocation();
+
     public void permissionResponse(int requestCode, String permissions[], int[] grantResults);
 }

@@ -23,9 +23,9 @@ public class Walking extends Transport implements Serializable {
 
     @Override
     public View getView(LayoutInflater inflater) {
-        View result = inflater.inflate(R.layout.walking_cell,null);
+        View result = inflater.inflate(R.layout.walking_cell, null);
 
-        ((TextView)result.findViewById(R.id.description)).setText(description);
+        ((TextView) result.findViewById(R.id.description)).setText(description);
 
         return result;
     }

@@ -16,7 +16,7 @@ public class LastPlaces {
 
     private List<MyPlace> placesList;
     private DataBaseConnector dataBaseConnector;
-    public static int MAX_SIZE=30;
+    public static int MAX_SIZE = 30;
 
     public LastPlaces(Context c) {
         dataBaseConnector = new DataBaseConnectorImpl(c);
@@ -24,26 +24,25 @@ public class LastPlaces {
     }
 
     public void add(MyPlace myPlace) {
-        if (myPlace==null) return;
+        if (myPlace == null) return;
 
         MyPlace place = new MyPlace(myPlace.getDescription(), myPlace.getPlaceID());
-        boolean isNew=true;
+        boolean isNew = true;
 
-        for (MyPlace temp : placesList){
-            if (temp.getPlaceID().equals(place.getPlaceID())){
-                isNew= false;
+        for (MyPlace temp : placesList) {
+            if (temp.getPlaceID().equals(place.getPlaceID())) {
+                isNew = false;
                 break;
             }
         }
-        if (isNew){
+        if (isNew) {
             placesList.add(place);
             dataBaseConnector.addPlace(place);
-            if(placesList.size()>MAX_SIZE){
+            if (placesList.size() > MAX_SIZE) {
                 placesList.remove(0);
                 dataBaseConnector.deletePlace(0);
             }
-        }
-        else {
+        } else {
             dataBaseConnector.deletePlace(place);
             dataBaseConnector.addPlace(place);
             placesList = dataBaseConnector.getPlaces();
@@ -51,19 +50,19 @@ public class LastPlaces {
 
     }
 
-    public List<MyPlace> getPlacesList(){
+    public List<MyPlace> getPlacesList() {
         List<MyPlace> temp = new ArrayList<>();
         temp.addAll(placesList);
         Collections.reverse(temp);
         return temp;
     }
 
-    public MyPlace get(int i){
-        if(i>=placesList.size()||i<0) return null;
-        return placesList.get(placesList.size()-1-i);
+    public MyPlace get(int i) {
+        if (i >= placesList.size() || i < 0) return null;
+        return placesList.get(placesList.size() - 1 - i);
     }
 
-    public void clear(){
+    public void clear() {
         dataBaseConnector.clearPlaces();
         placesList.clear();
     }

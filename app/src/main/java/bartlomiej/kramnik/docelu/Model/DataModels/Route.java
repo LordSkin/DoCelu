@@ -21,15 +21,15 @@ public class Route implements Serializable {
         return lineList;
     }
 
-    public int getLinesCount(){
+    public int getLinesCount() {
         return lineList.size();
     }
 
-    public Transport getFirst(){
+    public Transport getFirst() {
         return lineList.get(0);
     }
 
-    public Transport getLast(){
-        return lineList.get(lineList.size()-1);
+    public Transport getLast() {
+        return lineList.get(lineList.size() - 1);
     }
 }

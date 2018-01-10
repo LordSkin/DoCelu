@@ -29,11 +29,11 @@ public class PlaceHelperImpl implements Response.Listener<String>, Response.Erro
     @Override
     public void getPlace(Location location, PlaceResponseListener listener) {
         this.listener = listener;
-        if(location==null) {
+        if (location == null) {
             listener.error(new NullPointerException("null Location"));
             return;
         }
-        String currUrl = baseURL+"&origin=place_id:"+"&latlng="+location.getLatitude() +","+location.getLongitude();
+        String currUrl = baseURL + "&origin=place_id:" + "&latlng=" + location.getLatitude() + "," + location.getLongitude();
         RequestQueue queue = Volley.newRequestQueue(context);
         StringRequest stringRequest = new StringRequest(currUrl, this, this);
         queue.add(stringRequest);
@@ -48,10 +48,9 @@ public class PlaceHelperImpl implements Response.Listener<String>, Response.Erro
     @Override
     public void onResponse(String response) {
         MyPlace result = PlaceInterpreter.getMyPlace(response);
-        if(result==null){
+        if (result == null) {
             listener.error(new Exception("interpreter error"));
-        }
-        else {
+        } else {
             listener.placeResolved(result);
         }
     }

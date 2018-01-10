@@ -43,14 +43,14 @@ public class ListAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-         return position;
+        return position;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         convertView = infalter.inflate(R.layout.list_row_simple, parent, false);
-        TextView textView = (TextView)convertView.findViewById(R.id.text);
+        TextView textView = (TextView) convertView.findViewById(R.id.text);
         textView.setText(presenter.getLastPlace(position).getDescription());
-        return  convertView;
+        return convertView;
     }
 }

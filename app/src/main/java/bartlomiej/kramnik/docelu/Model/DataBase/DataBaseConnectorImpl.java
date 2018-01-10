@@ -29,13 +29,13 @@ public class DataBaseConnectorImpl extends SQLiteOpenHelper implements DataBaseC
     }
 
     public DataBaseConnectorImpl(Context context) {
-        super(context, "PlacesDB.db", null, 15);
+        super(context, "PlacesDB", null, 1);
         this.context = context;
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String CREATE_PLACES_TABLE = "CREATE TABLE " + tableName + "(" +  descriptionColumn + " TEXT, "+ placeIDColumn +" TEXT PRIMARY KEY)";
+        String CREATE_PLACES_TABLE = "CREATE TABLE " + tableName + "(" + descriptionColumn + " TEXT, " + placeIDColumn + " TEXT PRIMARY KEY)";
         sqLiteDatabase.execSQL(CREATE_PLACES_TABLE);
     }
 
@@ -52,7 +52,7 @@ public class DataBaseConnectorImpl extends SQLiteOpenHelper implements DataBaseC
 
         Cursor cursor = db.rawQuery("SELECT DISTINCT * FROM " + tableName, null);
 
-        if(cursor.getCount()<1)return new ArrayList<>();
+        if (cursor.getCount() < 1) return new ArrayList<>();
         if (cursor.moveToFirst()) {
             do {
                 MyPlace place = new MyPlace(cursor.getString(0), cursor.getString(1));
@@ -72,7 +72,7 @@ public class DataBaseConnectorImpl extends SQLiteOpenHelper implements DataBaseC
 
         Cursor cursor = db.rawQuery("SELECT * FROM " + tableName, null);
 
-        if (cursor.getCount()<1){
+        if (cursor.getCount() < 1) {
             db.close();
             return null;
         }
@@ -100,7 +100,7 @@ public class DataBaseConnectorImpl extends SQLiteOpenHelper implements DataBaseC
     public void clearPlaces() {
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL("DROP TABLE IF EXISTS " + tableName);
-        String CREATE_PLACES_TABLE = "CREATE TABLE " + tableName + "(" +  descriptionColumn + " TEXT, "+ placeIDColumn +" TEXT PRIMARY KEY)";
+        String CREATE_PLACES_TABLE = "CREATE TABLE " + tableName + "(" + descriptionColumn + " TEXT, " + placeIDColumn + " TEXT PRIMARY KEY)";
         db.execSQL(CREATE_PLACES_TABLE);
         db.close();
     }
@@ -108,7 +108,7 @@ public class DataBaseConnectorImpl extends SQLiteOpenHelper implements DataBaseC
     @Override
     public void deletePlace(MyPlace p) {
         SQLiteDatabase db = getWritableDatabase();
-        db.delete(tableName, placeIDColumn+" = \""+p.getPlaceID()+"\"", null);
+        db.delete(tableName, placeIDColumn + " = \"" + p.getPlaceID() + "\"", null);
         db.close();
     }
 

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -43,6 +44,7 @@ public class SearchActivityImpl extends AppCompatActivity implements SearchView,
     ListAdapter listAdapter;
     ProgressBar progressBar;
     FloatingActionButton locationButton ,searchButton;
+    View viewBorder;
 
 
     SearchPresenter presenter;
@@ -53,7 +55,9 @@ public class SearchActivityImpl extends AppCompatActivity implements SearchView,
 
         setContentView(R.layout.activity_search);
         from = (TextView) findViewById(R.id.fromTextView);
+        from.setOnClickListener(this);
         where = (TextView) findViewById(R.id.whereTextView);
+        where.setOnClickListener(this);
         searchButton = (FloatingActionButton) findViewById(R.id.searchButton);
         lastPlacesList = (ListView) findViewById(R.id.last_places_list);
         locationButton = (FloatingActionButton) findViewById(R.id.localisation);
@@ -66,7 +70,7 @@ public class SearchActivityImpl extends AppCompatActivity implements SearchView,
                 .setCountry("PL")
                 .build();
         autocompleteFragment.setFilter(typeFilter);
-        
+
         locationButton.setOnClickListener(this);
         searchButton.setOnClickListener(this);
         presenter = new SearchPresenterImpl();
@@ -82,6 +86,8 @@ public class SearchActivityImpl extends AppCompatActivity implements SearchView,
 
         lastPlacesList.setAdapter(listAdapter);
         lastPlacesList.setOnItemClickListener(this);
+
+        from.setBackgroundResource(R.layout.view_border);
     }
 
     @Override
@@ -129,6 +135,24 @@ public class SearchActivityImpl extends AppCompatActivity implements SearchView,
         progressBar.setVisibility(View.GONE);
     }
 
+    @Override
+    public void selectFrom() {
+        from.setBackgroundResource(R.layout.view_border);
+        where.setBackground(null);
+    }
+
+    @Override
+    public void selectWhere() {
+        from.setBackground(null);
+        where.setBackgroundResource(R.layout.view_border);
+    }
+
+    @Override
+    public void selectNone() {
+        where.setBackground(null);
+        from.setBackground(null);
+    }
+
 
     //for google autocomplete widget
     @Override
@@ -138,10 +162,10 @@ public class SearchActivityImpl extends AppCompatActivity implements SearchView,
 
     @Override
     public void onError(Status status) {
-        Toast.makeText(this, "Error could not find place :/", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, this.getString(R.string.routeNotFound), Toast.LENGTH_SHORT).show();
     }
 
-    //for search button
+    //from onClickListener
     @Override
     public void onClick(View view) {
         if(view.getId()==R.id.searchButton){
@@ -149,6 +173,12 @@ public class SearchActivityImpl extends AppCompatActivity implements SearchView,
         }
         if (view.getId()==R.id.localisation){
             presenter.useLocation();
+        }
+        if(view.getId()==R.id.fromTextView){
+            presenter.fromSelected();
+        }
+        if (view.getId()==R.id.whereTextView){
+            presenter.whereSelected();
         }
 
     }

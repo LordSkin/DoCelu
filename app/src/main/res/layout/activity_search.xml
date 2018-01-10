@@ -44,7 +44,7 @@
         android:id="@+id/fromTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="25dp"
+        android:textSize="@dimen/medium_font"
         android:layout_margin="@dimen/small_margin"
         android:hint="@string/fromHint"
         android:textAlignment="textStart" />
@@ -55,7 +55,7 @@
         android:layout_margin="@dimen/small_margin"
         android:hint="@string/whereHint"
         android:textAlignment="textStart"
-        android:textSize="25dp"
+        android:textSize="@dimen/medium_font"
         android:layout_height="wrap_content"/>
 </LinearLayout>
 
@@ -63,7 +63,7 @@
         android:id="@+id/localisation"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_margin="20dp"
+        android:layout_margin="@dimen/standard_margin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/location_icon" />
@@ -73,7 +73,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_width="wrap_content"
-        android:layout_marginRight="20dp"
+        android:layout_marginRight="@dimen/standard_margin"
         android:layout_marginBottom="80dp"
         android:layout_height="wrap_content"
         android:src="@drawable/search_icon" />

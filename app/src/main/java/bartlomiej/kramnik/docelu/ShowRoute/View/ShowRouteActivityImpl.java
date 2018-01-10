@@ -20,7 +20,6 @@ public class ShowRouteActivityImpl extends AppCompatActivity implements ShowRout
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_show_route_impl);
 
         Route r = (Route) getIntent().getExtras().get("route");
         String from = getIntent().getStringExtra("from");

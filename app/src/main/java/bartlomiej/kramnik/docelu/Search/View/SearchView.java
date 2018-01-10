@@ -30,4 +30,10 @@ public interface SearchView {
     public void showLoadingIndicator();
 
     public void hideLoadingIndicator();
+
+    public void selectFrom();
+
+    public void selectWhere();
+
+    public void selectNone();
 }

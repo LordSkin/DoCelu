@@ -17,6 +17,7 @@ import bartlomiej.kramnik.docelu.Model.Location.PermissionHelper.PermissionReque
 import bartlomiej.kramnik.docelu.Model.RouteSearch.RequestSender.RequestSender;
 import bartlomiej.kramnik.docelu.Model.RouteSearch.RouteFinderResponseListener;
 import bartlomiej.kramnik.docelu.R;
+import bartlomiej.kramnik.docelu.Search.View.SearchActivityImpl;
 import bartlomiej.kramnik.docelu.Search.View.SearchView;
 
 /**
@@ -42,14 +43,20 @@ public class SearchPresenterImpl implements SearchPresenter, RouteFinderResponse
 
     private MyPlace from, where;
 
+    private static final int SELECTED_FROM = 0;
+    private static final int SELECTED_WHERE = 1;
+
+    private int selected = SELECTED_FROM;
+
     @Override
     public void selectPlace(Place place) {
         MyPlace temp = new MyPlace(place.getName().toString(), place.getId().toString());
-        if (from == null) {
+        if (selected == SELECTED_FROM) {
             from = temp;
             view.showFrom(from.getDescription());
-        }
-        else {
+            selected = SELECTED_WHERE;
+            view.selectWhere();
+        } else {
             where = temp;
             view.showWhere(where.getDescription());
         }
@@ -58,22 +65,34 @@ public class SearchPresenterImpl implements SearchPresenter, RouteFinderResponse
     @Override
     public void selectFromList(int id) {
         MyPlace temp = lastPlaces.get(id);
-        if (from == null) {
+        if (selected == SELECTED_FROM) {
             from = temp;
             view.showFrom(from.getDescription());
-        }
-        else {
+            selected = SELECTED_WHERE;
+            view.selectWhere();
+        } else {
             where = temp;
             view.showWhere(where.getDescription());
         }
     }
 
     @Override
+    public void fromSelected() {
+        selected = SELECTED_FROM;
+        view.selectFrom();
+    }
+
+    @Override
+    public void whereSelected() {
+        selected = SELECTED_WHERE;
+        view.selectWhere();
+    }
+
+    @Override
     public void search() {
         if (from == null || where == null) {
             view.showError(R.string.emptyPlace);
-        }
-        else {
+        } else {
             view.showLoadingIndicator();
             requestSender.sendRequest(from, where, this);
         }
@@ -91,15 +110,14 @@ public class SearchPresenterImpl implements SearchPresenter, RouteFinderResponse
 
     @Override
     public void useLocation() {
-        if (permissionHelper.chechkLocationPermission()){
+        if (permissionHelper.chechkLocationPermission()) {
             view.showLoadingIndicator();
-            if(!locationHelper.isEnabled()) locationHelper.enable();
+            if (!locationHelper.isEnabled()) locationHelper.enable();
             locationHelper.getLocation(this);
+        } else {
+            permissionHelper.requestPermission(this);
         }
-        else {
-            permissionHelper.requestPermission(this);    
-        }
-        
+
     }
 
     @Override

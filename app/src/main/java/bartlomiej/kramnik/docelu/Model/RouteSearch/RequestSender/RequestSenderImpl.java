@@ -30,6 +30,7 @@ public class RequestSenderImpl implements Response.Listener<String>, Response.Er
 
     /**
      * Send request async. Answer is deliwered to listener
+     *
      * @param origin
      * @param dest
      */
@@ -37,11 +38,11 @@ public class RequestSenderImpl implements Response.Listener<String>, Response.Er
     public void sendRequest(MyPlace origin, MyPlace dest, RouteFinderResponseListener listener)//sending request to google directions api
     {
         this.listener = listener;
-        if(origin==null||dest==null){
+        if (origin == null || dest == null) {
             listener.error(new NullPointerException("Null Place"));
             return;
         }
-        String currUrl = baseURL+"&origin=place_id:"+origin.getPlaceID()+"&destination=place_id:"+dest.getPlaceID();
+        String currUrl = baseURL + "&origin=place_id:" + origin.getPlaceID() + "&destination=place_id:" + dest.getPlaceID();
         RequestQueue queue = Volley.newRequestQueue(context);
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(currUrl, this, this);
@@ -52,10 +53,9 @@ public class RequestSenderImpl implements Response.Listener<String>, Response.Er
     @Override
     public void onResponse(String response) {
         Route route = JsonResponseInterpreter.getRoute(response);
-        if (route!=null){
+        if (route != null) {
             listener.routeFound(route);
-        }
-        else {
+        } else {
             listener.routeNotFound();
         }
     }

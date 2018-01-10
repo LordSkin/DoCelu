@@ -17,8 +17,8 @@ import bartlomiej.kramnik.docelu.Model.DataModels.Transport.Walking;
 
 public class JsonResponseInterpreter {
 
-    public static Route getRoute(String s){
-        try{
+    public static Route getRoute(String s) {
+        try {
             JSONObject json = new JSONObject(s);
             JSONArray array = json.getJSONArray("routes");
             json = array.getJSONObject(0);
@@ -30,7 +30,7 @@ public class JsonResponseInterpreter {
             for (int i = 0; i < array.length(); i++) {
                 json = array.getJSONObject(i);
                 String type = json.getString("travel_mode");
-                if (type.equals("TRANSIT")){
+                if (type.equals("TRANSIT")) {
                     json = json.getJSONObject("transit_details");
 
                     lines.add(new Line(json.getJSONObject("line").getString("short_name"),
@@ -39,13 +39,13 @@ public class JsonResponseInterpreter {
                             json.getInt("num_stops"),
                             json.getJSONObject("line").getJSONObject("vehicle").getString("type")));
                 }
-                if (type.equals("WALKING")){
+                if (type.equals("WALKING")) {
                     lines.add(new Walking(json.getString("html_instructions")));
                 }
             }
             return new Route(lines);
         }
-        catch (Exception e){
+        catch (Exception e) {
             e.printStackTrace();
             return null;
         }

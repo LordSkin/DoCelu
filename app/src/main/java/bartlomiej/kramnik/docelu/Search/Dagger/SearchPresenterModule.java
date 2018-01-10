@@ -33,27 +33,27 @@ public class SearchPresenterModule {
     }
 
     @Provides
-    SearchView provideSearchView(){
+    SearchView provideSearchView() {
         return view;
     }
 
     @Provides
-    LastPlaces provideLastPlaces(){
-        return  lastPlaces;
+    LastPlaces provideLastPlaces() {
+        return lastPlaces;
     }
 
     @Provides
-    RequestSender provideRequestSender(){
-        return  requestSender;
+    RequestSender provideRequestSender() {
+        return requestSender;
     }
 
     @Provides
-    PermissionHelper providesPermissionHelper(){
+    PermissionHelper providesPermissionHelper() {
         return permissionHelper;
     }
 
     @Provides
-    LocationHelper provideLocationHelper(){
+    LocationHelper provideLocationHelper() {
         return locationHelper;
     }
 }

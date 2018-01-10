@@ -11,7 +11,7 @@ import bartlomiej.kramnik.docelu.Model.DataModels.MyPlace;
 
 public class PlaceInterpreter {
 
-    public static MyPlace getMyPlace(String place){
+    public static MyPlace getMyPlace(String place) {
         try {
             JSONObject json = new JSONObject(place);
             json = json.getJSONArray("results").getJSONObject(0);

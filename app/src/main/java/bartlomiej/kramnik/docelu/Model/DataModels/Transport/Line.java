@@ -31,10 +31,10 @@ public class Line extends Transport implements Serializable {
         this.where = where;
         this.numStops = numStops;
         this.vechicleType = OTHER;
-        if(vechicleType.equals("TRAM")){
+        if (vechicleType.equals("TRAM")) {
             this.vechicleType = TRAMWAJ;
         }
-        if(vechicleType.equals("BUS")){
+        if (vechicleType.equals("BUS")) {
             this.vechicleType = BUS;
         }
     }
@@ -60,15 +60,15 @@ public class Line extends Transport implements Serializable {
     }
 
     @Override
-    public View getView(LayoutInflater inflater){
+    public View getView(LayoutInflater inflater) {
         View result = inflater.inflate(R.layout.line_cell, null);
-        ((TextView)result.findViewById(R.id.from)).setText(from);
-        ((TextView)result.findViewById(R.id.where)).setText(where);
-        ((TextView)result.findViewById(R.id.lineName)).setText(name);
-        ((TextView)result.findViewById(R.id.numStops)).setText(numStops+" stops");
+        ((TextView) result.findViewById(R.id.from)).setText(from);
+        ((TextView) result.findViewById(R.id.where)).setText(where);
+        ((TextView) result.findViewById(R.id.lineName)).setText(name);
+        ((TextView) result.findViewById(R.id.numStops)).setText(numStops + " stops");
 
-        ((ImageView)result.findViewById(R.id.vechicleType)).setImageResource(vechicleType==Line.BUS ? R.drawable.bus : R.drawable.tram);
+        ((ImageView) result.findViewById(R.id.vechicleType)).setImageResource(vechicleType == Line.BUS ? R.drawable.bus : R.drawable.tram);
 
-        return  result;
+        return result;
     }
 }

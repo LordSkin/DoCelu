@@ -6,5 +6,6 @@ package bartlomiej.kramnik.docelu.Model.Location.PermissionHelper;
 
 public interface PermissionRequestResponseListener {
     public void permissionsGranted();
+
     public void permissionsDenied();
 }

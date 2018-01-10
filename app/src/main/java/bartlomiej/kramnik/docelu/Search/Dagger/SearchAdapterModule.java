@@ -13,13 +13,12 @@ public class SearchAdapterModule {
     private SearchPresenter presenter;
 
 
-
     public SearchAdapterModule(SearchPresenter presenter) {
         this.presenter = presenter;
     }
 
     @Provides
-    public SearchPresenter presenterProvider(){
+    public SearchPresenter presenterProvider() {
         return presenter;
     }
 }

@@ -7,7 +7,7 @@ import dagger.Component;
 import dagger.Provides;
 
 /**
- * Created by adolf on 27.12.17.
+ * Component required by dagger for PlaceSearch
  */
 
 @Component(modules = {SearchPresenterModule.class, SearchAdapterModule.class})

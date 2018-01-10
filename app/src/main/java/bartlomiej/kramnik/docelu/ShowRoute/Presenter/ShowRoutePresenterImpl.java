@@ -42,18 +42,18 @@ public class ShowRoutePresenterImpl implements ShowRoutePresenter {
 
         LayoutInflater inflater = LayoutInflater.from(view.getContext());
 
-        View start = inflater.inflate(R.layout.stop_name,null);
-        ((TextView)start.findViewById(R.id.stopName)).setText(from);
+        View start = inflater.inflate(R.layout.stop_name, null);
+        ((TextView) start.findViewById(R.id.stopName)).setText(from);
         linearLayout.addView(start);
 
-        for(Transport l : route.getLineList()){
-            linearLayout.addView(inflater.inflate(R.layout.arrow_down,null));
+        for (Transport l : route.getLineList()) {
+            linearLayout.addView(inflater.inflate(R.layout.arrow_down, null));
             linearLayout.addView(l.getView(inflater));
         }
 
-        linearLayout.addView(inflater.inflate(R.layout.arrow_down,null));
-        View stop = inflater.inflate(R.layout.stop_name,null);
-        ((TextView)stop.findViewById(R.id.stopName)).setText(where);
+        linearLayout.addView(inflater.inflate(R.layout.arrow_down, null));
+        View stop = inflater.inflate(R.layout.stop_name, null);
+        ((TextView) stop.findViewById(R.id.stopName)).setText(where);
         linearLayout.addView(stop);
 
         view.showView(scrollView);

@@ -6,7 +6,7 @@ import dagger.Module;
 import dagger.Provides;
 
 /**
- * Created by Admin on 30.12.2017.
+ * Dagger module for showRoute presenter
  */
 
 @Module
@@ -21,12 +21,12 @@ public class ShowRoutePresenterModule {
     }
 
     @Provides
-    public Route routeProvide(){
+    public Route routeProvide() {
         return route;
     }
 
     @Provides
-    public ShowRouteView showRouteViewProvide(){
+    public ShowRouteView showRouteViewProvide() {
         return view;
     }
 

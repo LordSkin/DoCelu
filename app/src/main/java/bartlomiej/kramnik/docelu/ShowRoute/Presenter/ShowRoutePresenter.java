@@ -6,6 +6,6 @@ import android.view.View;
  * Presenter for RouteView
  */
 
-public interface ShowRoutePresenter  {
+public interface ShowRoutePresenter {
     public void loadView();
 }

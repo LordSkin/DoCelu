@@ -6,7 +6,7 @@ import bartlomiej.kramnik.docelu.ShowRoute.View.ShowRouteView;
 import dagger.Component;
 
 /**
- * Created by Admin on 30.12.2017.
+ * Dagger component for showRoute
  */
 @Component(modules = ShowRoutePresenterModule.class)
 public interface ShowRouteViewComponent {

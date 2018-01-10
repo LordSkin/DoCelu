@@ -37,12 +37,11 @@ public class LocationHelperImpl implements LocationListener, LocationHelper, Pla
 
     private static LocationHelper locationHelperSingleton;
 
-    public static LocationHelper getLocationHelper(Context context){
-        if (locationHelperSingleton==null){
+    public static LocationHelper getLocationHelper(Context context) {
+        if (locationHelperSingleton == null) {
             locationHelperSingleton = new LocationHelperImpl(context);
             return locationHelperSingleton;
-        }
-        else {
+        } else {
             return locationHelperSingleton;
         }
     }
@@ -50,8 +49,7 @@ public class LocationHelperImpl implements LocationListener, LocationHelper, Pla
 
     private LocationHelperImpl(Context context) {
         isEnabled = false;
-        if(context!=null)
-        {
+        if (context != null) {
             placeHelper = new PlaceHelperImpl(context);
             this.context = context;
 

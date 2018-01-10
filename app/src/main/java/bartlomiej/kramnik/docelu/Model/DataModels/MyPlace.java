@@ -17,9 +17,9 @@ public class MyPlace {
     }
 
     public MyPlace(Place place) {
-        ///TODO
+        this.placeID = place.getId();
+        this.description = place.getAddress().toString();
     }
-
 
 
     public String getDescription() {
