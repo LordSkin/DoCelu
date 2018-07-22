@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:id="@+id/description"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/black"
         />
 
 
