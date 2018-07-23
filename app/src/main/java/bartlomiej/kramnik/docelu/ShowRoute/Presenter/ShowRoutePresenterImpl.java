@@ -55,6 +55,7 @@ public class ShowRoutePresenterImpl implements ShowRoutePresenter {
         View stop = inflater.inflate(R.layout.stop_name, null);
         ((TextView) stop.findViewById(R.id.stopName)).setText(where);
         linearLayout.addView(stop);
+        linearLayout.addView(inflater.inflate(R.layout.powered_by_google, null));
 
         view.showView(scrollView);
     }
