@@ -37,10 +37,12 @@ public class JsonResponseInterpreter {
                             json.getJSONObject("departure_stop").getString("name"),
                             json.getJSONObject("arrival_stop").getString("name"),
                             json.getInt("num_stops"),
-                            json.getJSONObject("line").getJSONObject("vehicle").getString("type")));
+                            json.getJSONObject("line").getJSONObject("vehicle").getString("type"),
+                            json.getJSONObject("arrival_time").getString("text"),
+                            json.getJSONObject("departure_time").getString("text")));
                 }
                 if (type.equals("WALKING")) {
-                    lines.add(new Walking(json.getString("html_instructions")));
+                    lines.add(new Walking(json.getString("html_instructions"), json.getJSONObject("duration").getString("text")));
                 }
             }
             return new Route(lines);
