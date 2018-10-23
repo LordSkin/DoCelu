@@ -2,6 +2,7 @@ package bartlomiej.kramnik.docelu.Search.View;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.VisibleForTesting;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import bartlomiej.kramnik.docelu.Model.DataBase.LastPlaces;
 import bartlomiej.kramnik.docelu.Model.DataModels.Route;
 import bartlomiej.kramnik.docelu.R;
 import bartlomiej.kramnik.docelu.Search.Dagger.DaggerSearchComponent;
@@ -88,6 +90,11 @@ public class SearchActivityImpl extends AppCompatActivity implements SearchView,
         lastPlacesList.setOnItemClickListener(this);
 
         from.setBackgroundResource(R.layout.view_border);
+    }
+
+    @VisibleForTesting
+    public SearchPresenterImpl getPresenter(){
+        return (SearchPresenterImpl)presenter;
     }
 
     @Override

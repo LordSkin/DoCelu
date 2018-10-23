@@ -1,6 +1,7 @@
 package bartlomiej.kramnik.docelu.Search.Presenter;
 
 import android.location.Location;
+import android.support.annotation.VisibleForTesting;
 
 import com.google.android.gms.location.places.Place;
 
@@ -61,6 +62,11 @@ public class SearchPresenterImpl implements SearchPresenter, RouteFinderResponse
             where = temp;
             view.showWhere(where.getDescription());
         }
+    }
+
+    @VisibleForTesting
+    public void setLastPlaces(LastPlaces lastPlaces) {
+        this.lastPlaces = lastPlaces;
     }
 
     @Override
