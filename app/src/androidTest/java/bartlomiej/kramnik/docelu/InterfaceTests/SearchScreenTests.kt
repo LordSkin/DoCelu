@@ -132,5 +132,4 @@ class SearchScreenTests {
 
         onView(withId(R.id.fromTextView)).check(matches(not(withText(""))))
     }
-
 }
